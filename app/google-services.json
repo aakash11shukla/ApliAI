@@ -69,17 +69,17 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:726158065680:android:ddaa674940cefe9c",
+        "mobilesdk_app_id": "1:726158065680:android:c1391b6b40ccc2df",
         "android_client_info": {
-          "package_name": "com.example.apliaiexperience"
+          "package_name": "com.example.apliai"
         }
       },
       "oauth_client": [
         {
-          "client_id": "726158065680-qmcbjvpnov8h3m0tanmp7f41i4n6klkc.apps.googleusercontent.com",
+          "client_id": "726158065680-9bd1pn957jhic9ps6mrg52ku1eeuamc3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.apliaiexperience",
+            "package_name": "com.example.apliai",
             "certificate_hash": "a88f6cb9040680e21897a3734b4a6bd2053bb44d"
           }
         },

@@ -9,8 +9,6 @@ import androidx.work.WorkerParameters;
 
 import com.example.apliai.database.ExperienceDatabase;
 import com.example.apliai.models.Experience;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,23 +22,21 @@ public class UploadWorker extends Worker {
     @Override
     public Result doWork() {
 
-        long id = getInputData().getLong(SyncStateContract.Constants._ID, 0);
+        String id = getInputData().getString(SyncStateContract.Constants._ID);
 
         ExperienceDatabase db = ExperienceDatabase.getDatabase(getApplicationContext());
         Experience experience = db.experienceDao().getExperienceByExperienceId(id);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uniqueId;
-
-        if(user == null){
-            uniqueId = "hyKA4ElBpUMAF8o9SK1XedKfsUo2";
-        }else {
-            uniqueId = user.getUid();
-        }
+        String uniqueId = getInputData().getString("UserId");
 
         FirebaseDatabase mExperienceDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mExperienceReference = mExperienceDatabase.getReference().child(("EXPERIENCE/" + uniqueId));
-        mExperienceReference.push().setValue(experience);
+        DatabaseReference mExperienceReference = mExperienceDatabase.getReference().child("EXPERIENCE/" + uniqueId + "/" + id);
+        mExperienceReference.child("companyName").setValue(experience.getCompanyName());
+        mExperienceReference.child("industry").setValue(experience.getIndustry());
+        mExperienceReference.child("designation").setValue(experience.getDesignation());
+        mExperienceReference.child("location").setValue(experience.getLocation());
+        mExperienceReference.child("fromDate").setValue(experience.getFromDate());
+        mExperienceReference.child("toDate").setValue(experience.getToDate());
 
         return Result.success();
     }

@@ -3,13 +3,15 @@ package com.example.apliai.models;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity(tableName = "experience_table")
 public class Experience {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "experienceId")
-    private long eid;
+    private String eid;
     @ColumnInfo(name = "companyName")
     private String companyName;
     @ColumnInfo(name = "industry")
@@ -19,18 +21,18 @@ public class Experience {
     @ColumnInfo(name = "location")
     private String location;
     @ColumnInfo(name = "from")
-    private String from;
+    private String fromDate;
     @ColumnInfo(name = "to")
-    private String to;
+    private String toDate;
 
     public Experience() {
     }
 
-    public long getEid() {
+    public String getEid() {
         return eid;
     }
 
-    public void setEid(long eid) {
+    public void setEid(String eid) {
         this.eid = eid;
     }
 
@@ -66,19 +68,19 @@ public class Experience {
         this.location = location;
     }
 
-    public String getFrom() {
-        return from;
+    public String getFromDate() {
+        return fromDate;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setFromDate(String fromDate) {
+        this.fromDate = fromDate;
     }
 
-    public String getTo() {
-        return to;
+    public String getToDate() {
+        return toDate;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setToDate(String toDate) {
+        this.toDate = toDate;
     }
 }

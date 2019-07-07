@@ -15,6 +15,9 @@ import com.example.apliai.backgroundTasks.UploadWorker;
 import com.example.apliai.database.ExperienceDao;
 import com.example.apliai.database.ExperienceDatabase;
 import com.example.apliai.models.Experience;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -39,9 +42,23 @@ public class ExperienceRepository {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                long id = experienceDao.insert(experience);
+
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String uniqueId;
+
+                if(user == null){
+                    uniqueId = "hyKA4ElBpUMAF8o9SK1XedKfsUo2";
+                }else {
+                    uniqueId = user.getUid();
+                }
+                String key = firebaseDatabase.getReference().child("EXPERIENCE/" + uniqueId).push().getKey();
+
+                experience.setEid(key);
+                experienceDao.insert(experience);
                 Data.Builder builder = new Data.Builder();
-                builder.putLong(SyncStateContract.Constants._ID, id);
+                builder.putString("UserId", uniqueId);
+                builder.putString(SyncStateContract.Constants._ID, key);
 
                 Constraints constraints = new Constraints.Builder()
                         .setRequiredNetworkType(NetworkType.CONNECTED)

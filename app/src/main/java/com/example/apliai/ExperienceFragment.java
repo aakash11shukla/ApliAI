@@ -37,10 +37,9 @@ public class ExperienceFragment extends Fragment {
         binding.setExperienceviewmodel(viewModel);
     }
 
+    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_experience, container, false);
         binding.setLifecycleOwner(this);
         return binding.getRoot();
@@ -79,8 +78,8 @@ public class ExperienceFragment extends Fragment {
                     experience.setIndustry(industry);
                     experience.setDesignation(designation);
                     experience.setLocation(location);
-                    experience.setFrom(fromDate);
-                    experience.setTo(toDate);
+                    experience.setFromDate(fromDate);
+                    experience.setToDate(toDate);
                     viewModel.addExperience(experience);
                     Toast.makeText(getContext(), "EXPERIENCE ADDED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
                 }

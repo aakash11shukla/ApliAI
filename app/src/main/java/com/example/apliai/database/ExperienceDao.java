@@ -13,10 +13,10 @@ import java.util.List;
 public interface ExperienceDao {
 
     @Insert
-    long insert(Experience experience);
+    void insert(Experience experience);
 
     @Query("SELECT * from experience_table WHERE experienceId = :id")
-    Experience getExperienceByExperienceId(long id);
+    Experience getExperienceByExperienceId(String id);
 
     @Query("SELECT * from experience_table")
     LiveData<List<Experience>> getAllExperiences();
